@@ -36,6 +36,7 @@ import (
 	"github.com/TencentBlueKing/blueking-service-governance/bkms-server/pkg/server/taskqtask/buildpoll"
 	"github.com/TencentBlueKing/blueking-service-governance/bkms-server/pkg/server/taskqtask/depsvcredis"
 	"github.com/TencentBlueKing/blueking-service-governance/bkms-server/pkg/server/taskqtask/example"
+	"github.com/TencentBlueKing/blueking-service-governance/bkms-server/pkg/server/taskqtask/helmdeploypoll"
 )
 
 // Setup 初始化各业务任务 handler 所需依赖, 并将 handler 挂载到给定的 mux。
@@ -55,5 +56,6 @@ func Setup(mux *asynq.ServeMux) error {
 	mux.Handle(example.ExampleTask.Name(), example.ExampleTask.Handler())
 	mux.Handle(buildpoll.Task.Name(), buildpoll.Task.Handler())
 	mux.Handle(appmodeldeploypoll.Task.Name(), appmodeldeploypoll.Task.Handler())
+	mux.Handle(helmdeploypoll.Task.Name(), helmdeploypoll.Task.Handler())
 	return nil
 }
